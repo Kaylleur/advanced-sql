@@ -18,7 +18,7 @@ fake = Faker('fr_FR')
 
 # Génération des clients
 print("Génération des clients...")
-num_customers = 1000
+num_customers = 100000
 customer_ids = []
 for _ in range(num_customers):
     name = fake.name()
@@ -34,7 +34,7 @@ for _ in range(num_customers):
 
 # Génération des fournisseurs
 print("Génération des fournisseurs...")
-num_suppliers = 100
+num_suppliers = 10000
 supplier_ids = []
 for _ in range(num_suppliers):
     name = fake.company()
@@ -55,7 +55,7 @@ for _ in range(num_suppliers):
 
 # Génération des catégories
 print("Génération des catégories...")
-num_categories = 10
+num_categories = 500
 category_ids = []
 for _ in range(num_categories):
     name = fake.unique.word().capitalize()
@@ -71,7 +71,7 @@ for _ in range(num_categories):
 
 # Génération des produits
 print("Génération des produits...")
-num_products = 500
+num_products = 50000
 product_ids = []
 for _ in range(num_products):
     name = fake.word().capitalize() + ' ' + fake.word().capitalize()
@@ -91,7 +91,7 @@ for _ in range(num_products):
 
 # Génération des commandes
 print("Génération des commandes...")
-num_orders = 1000
+num_orders = 200000
 order_ids = []
 for _ in range(num_orders):
     customer_id = random.choice(customer_ids)
@@ -123,7 +123,7 @@ for order_id in order_ids:
 
 # Génération des avis
 print("Génération des avis...")
-num_reviews = 2000
+num_reviews = 50000
 for _ in range(num_reviews):
     product_id = random.choice(product_ids)
     customer_id = random.choice(customer_ids)
@@ -229,7 +229,7 @@ for order_item_id in returned_order_item_ids:
 
 # Génération des promotions
 print("Génération des promotions...")
-num_promotions = 20
+num_promotions = 200
 promotion_ids = []
 for _ in range(num_promotions):
     name = fake.catch_phrase()
