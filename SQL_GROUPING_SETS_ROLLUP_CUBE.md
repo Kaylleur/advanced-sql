@@ -19,17 +19,18 @@ Calculer les totaux des ventes (somme des prix) par différentes dimensions comm
 
 ### Requête :
 ```sql
-SELECT 
-    order_date,
+SELECT
+     DATE_TRUNC('day',order_date) as truncated_date,
     customer_id,
     product_id,
     SUM(price) AS total_sales
-FROM 
+FROM
     orders
-JOIN 
+JOIN
     order_items ON orders.id = order_items.order_id
-GROUP BY 
-    GROUPING SETS ((order_date, customer_id), (customer_id, product_id), (order_date), ());
+GROUP BY
+    GROUPING SETS (( DATE_TRUNC('day',order_date), customer_id), (customer_id, product_id), ( DATE_TRUNC('day',order_date)), ())
+ORDER BY truncated_date DESC;
 ```
 
 ### Explication :
@@ -61,16 +62,17 @@ GROUP BY
 
 ### Requête :
 ```sql
-SELECT 
-    order_date,
+SELECT
+    DATE_TRUNC('day', order_date) AS truncated_date,
     customer_id,
     SUM(price) AS total_sales
-FROM 
+FROM
     orders
-JOIN 
+JOIN
     order_items ON orders.id = order_items.order_id
-GROUP BY 
-    ROLLUP (order_date, customer_id);
+GROUP BY
+    ROLLUP (DATE_TRUNC('day', order_date), customer_id)
+ORDER BY truncated_date DESC;
 ```
 
 ### Explication :
@@ -103,17 +105,18 @@ GROUP BY
 
 ### Requête :
 ```sql
-SELECT 
-    order_date,
+SELECT
+     DATE_TRUNC('day',order_date) as truncated_date,
     customer_id,
     product_id,
     SUM(price) AS total_sales
-FROM 
+FROM
     orders
-JOIN 
+JOIN
     order_items ON orders.id = order_items.order_id
-GROUP BY 
-    CUBE (order_date, customer_id, product_id);
+GROUP BY
+    CUBE ( DATE_TRUNC('day',order_date), customer_id, product_id)
+ORDER BY truncated_date DESC;
 ```
 
 ### Explication :
